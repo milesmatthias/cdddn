@@ -2,13 +2,17 @@
 <html>
 <head>
   <title>Dummy</title>
+  <%= render 'shared/cdddn/desktop_layout' %>
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <h1>DESKTOP</h1>
+
+  <%= yield %>
 
 </body>
 </html>

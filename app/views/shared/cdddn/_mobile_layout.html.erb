@@ -1,0 +1,11 @@
+<%= javascript_include_tag 'cdddn/application' %>
+<%= render 'shared/cdddn/mobile_detection.html.erb' %>
+
+<script>
+  var device_cookie  = cookie.get('device'),
+      cookiesEnabled = cookie.enabled();
+
+  if (cookiesEnabled && device_cookie == 'desktop') {
+    window.location.reload(true);
+  }
+</script>

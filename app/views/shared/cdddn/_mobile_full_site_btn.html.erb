@@ -1,0 +1,21 @@
+
+<div id="view_full_site_btn_wrapper">
+  <%= link_to 'View full site', '#', :id => 'view_full_site_btn' %>
+</div>
+
+
+<script>
+
+  document.getElementById('view_full_site_btn').addEventListener('click', function(e){
+    cookie.set('device', 'desktop', {
+      domain: '<%= Rails.env.development? ? '' : Settings.host %>',
+      path  : '/'
+    });
+
+    window.location.assign('<%= url_for %>');
+
+    e.preventDefault();
+    return false;
+  });
+
+</script>

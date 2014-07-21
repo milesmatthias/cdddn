@@ -1,2 +1,40 @@
-<h1>Set device...</h1>
+<h1>Which device do you want to see the site as?</h1>
 
+<form id="device_selection_form">
+  <input type="radio" name="device_option" value="desktop">Desktop</input>
+  <input type="radio" name="device_option" value="mobile">Mobile</input>
+
+  <button id="set_device_btn">Set device</button>
+</form>
+
+
+<script>
+
+  document.getElementById('set_device_btn').addEventListener('click', function(e){
+
+    // setting the device cookie to your selection
+    var options         = document.getElementsByName('device_option'),
+        selected_device = '';
+
+    for(var i=0; i < options.length; i++){
+      if (options[i].checked) {
+        selected_device = options[i].value;
+      }
+    }
+
+    cookie.set('device', selected_device, {
+      domain: '<%= Rails.env.development? ? '' : Settings.host %>',
+      path  : '/'
+    });
+
+    // window.location to whereever you came from
+    window.location.assign(localStorage.getItem('referrer_href'));
+
+    alert('Okay, we set your device to be ' + selected_device);
+
+    e.preventDefault();
+    return false;
+  });
+
+
+</script>

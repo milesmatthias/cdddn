@@ -1,2 +1,26 @@
-<h1>Get device...</h1>
+<script>
 
+  function isMobile(){
+    var MOBILE_USER_AGENTS = 'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' +
+                          'audiovox|motorola|samsung|telit|upg1|windows ce|ucweb|astel|plucker|' +
+                          'x320|x240|j2me|sgh|portable|sprint|docomo|kddi|softbank|android|mmp|' +
+                          'pdxgw|netfront|xiino|vodafone|portalmmm|sagem|mot-|sie-|ipod|up\\.b|' +
+                          'webos|amoi|novarra|cdm|alcatel|pocket|ipad|iphone|mobileexplorer|' +
+                          'mobile|zune',
+        mobile_regex      = new RegExp(MOBILE_USER_AGENTS, "i");
+
+    return navigator.userAgent.match(mobile_regex);
+  }
+
+  // setting the device cookie to what we detect
+  var detected_device = isMobile() ? 'mobile' : 'desktop';
+
+  cookie.set('device', detected_device, {
+    domain: '<%= Rails.env.development? ? '' : Settings.host %>',
+    path  : '/'
+  });
+
+  // window.location to whereever you came from
+  window.location.assign(localStorage.getItem('referrer_href'));
+
+</script>

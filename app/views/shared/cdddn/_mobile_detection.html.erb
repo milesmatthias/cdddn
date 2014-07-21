@@ -1,0 +1,15 @@
+<script>
+
+  if (!window.location.href.match(/cdddn\/get|cdddn\/set/)){
+    console.log('logging the window.location.href = ' + window.location.href);
+    localStorage.setItem('referrer_href', window.location.href);
+  }
+
+  var device_cookie  = cookie.get('device'),
+      cookiesEnabled = cookie.enabled();
+
+  if (cookiesEnabled && device_cookie == undefined) {
+    window.location.assign('/cdddn/get');
+  }
+
+</script>
