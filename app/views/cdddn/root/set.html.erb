@@ -28,7 +28,7 @@
     });
 
     // window.location to whereever you came from
-    window.location.assign(localStorage.getItem('referrer_href'));
+    window.location.assign(localStorage.getItem('referrer_href') || '/');
 
     alert('Okay, we set your device to be ' + selected_device);
 
