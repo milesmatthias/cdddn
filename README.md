@@ -2,6 +2,8 @@
 
 Content Delivery & Device Detection Network (CDDDN) is a rails engine that provides mobile detection functionality for use in CDNs, like CloudFront and Akamai. This engine specifically allows you to cache static pages in both desktop and mobile versions for the same domain & url, rather than using an m.example.com approach.
 
+Full explanation at the [dojo4 blog](http://dojo4.com/blog/mobile-detection-behind-a-cdn).
+
 ## What this solves
 
 * Mobile device detection on the client. With a CDN in front of your server, you can't do server side device detection.
