@@ -31,4 +31,4 @@ This gem also allows the user to decide to view the full desktop site any time t
 ```rb
   Mime::Type.register_alias "text/html", :mobile
 ```
-8. In your CDN configuration, you'll need to whitelist a single cookie, called `device`.
+8. In your CDN configuration, you'll need to whitelist a single cookie, called `cdddn_device`.
