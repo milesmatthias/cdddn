@@ -11,7 +11,7 @@ Content Delivery & Device Detection Network (CDDDN) is a rails engine that provi
 
 ## How it works
 
-On the initial request, CDDDN automatically detects the user's device and then sets the Rails' `request.format` to be either `:mobile` or `:html`. This means that you can provide separate views for mobile and desktop by having views name `index.mobile.erb` for mobile and `index.html.erb` for desktop. It also means that you can provide different data in your controllers using conditionals based on the `request.format`. For example:
+On the initial request, CDDDN automatically detects the user's device (by redirecting them to a detection page) and then sets the Rails' `request.format` to be either `:mobile` or `:html`. This means that you can provide separate views for mobile and desktop by having views name `index.mobile.erb` for mobile and `index.html.erb` for desktop. It also means that you can provide different data in your controllers using conditionals based on the `request.format`. For example:
 
 ```rb
   if request.format == :mobile
@@ -23,9 +23,16 @@ On the initial request, CDDDN automatically detects the user's device and then s
 
 This gem also allows the user to decide to view the full desktop site any time they'd like. They can also manually override which device they would like to see the site as by going to `/cdddn/set`. This is especially useful for developers testing on multiple devices, since normally they would need to clear their cookies each time they want to go from desktop to mobile.
 
+### Redirections in browser to achieve this:
+
+1. User clicks on a link to get to your site for the first time (http://example.com/blog/hello-world). This url is saved in localStorage.
+2. User does not have a `cdddn_device` cookie set, so they are redirected to `/cdddn/get`.
+3. User's device is detected via user agent in javascript to be either 'mobile' or 'desktop'. That value is set to the value of the `cdddn_device` cookie.
+4. The user is redirected back to the url in localStorage from step #1 and will see the correct version of the site.
+
 ## Requirement
 
-This gem uses [localStorage](http://caniuse.com/#feat=namevalue-storage) to help the user get back to the page they first visited the site on. This means all browsers except Opera Mini and IE7 & below are supported officially. If a user visits the site with one of those browsers, they'll be redirected to the home page.
+This gem uses [localStorage](http://caniuse.com/#feat=namevalue-storage) to help the user get back to the page they first visited the site on. This means all browsers except Opera Mini and IE7 & below are supported officially. If a user visits the site with one of those browsers, they'll be redirected to the home page. In other words, step #4 above will not work correctly.
 
 ## Installation
 
